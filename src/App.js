@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import {red700} from 'material-ui/styles/colors'
-import Form from './Form.js'
+import {InitialList, Form} from './Form.js'
 
 const theme = getMuiTheme({
   palette: {primary1Color: red700}
@@ -11,9 +11,14 @@ const theme = getMuiTheme({
 class App extends Component {
   render () {
     return (
-      <MuiThemeProvider muiTheme={theme}>
-        <Form />
-      </MuiThemeProvider>
+      <div>
+        <MuiThemeProvider muiTheme={theme}>
+          <Form />
+        </MuiThemeProvider>
+        <MuiThemeProvider muiTheme={theme}>
+          <InitialList />
+        </MuiThemeProvider>
+      </div>
     )
   }
 }

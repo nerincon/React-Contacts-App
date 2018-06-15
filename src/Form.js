@@ -6,21 +6,94 @@ import TextField from 'material-ui/TextField'
 import './form.css'
 // import MapsMyLocation from 'material-ui/SvgIcon'
 
-const defaultList = [{name: 'Nelson', email: 'nerincon1@gmail.com'}, {name: 'Rincon', email: 'rincon1@gmail.com'}]
+// var show = false
 
-function OriginalList () {
-  const listItems = defaultList.map(TemplateList)
+// 1) convert template list to class based component because it needs state
 
-  return <ul>{listItems}</ul>
+// 2) in the constructor initialize your state: details showing true or false
+
+// 3) In the render func of that component it needs to toggle state.
+
+const defaultList = [
+  {name: 'Nelson', city: 'Houston', state: 'TX', email: 'nelson@gmail.com', phone: '7862417822', address: 'test address1', zip: '77007'},
+  {name: 'Eduardo', city: 'Dallas', state: 'TX', email: 'eduardo@gmail.com', phone: '7862417822', address: 'test address2', zip: '77007'},
+  {name: 'Rincon', city: 'Austin', state: 'TX', email: 'rincon@gmail.com', phone: '7862417822', address: 'test address3', zip: '77007'},
+  {name: 'Contreras', city: 'San Antonio', state: 'TX', email: 'contreras@gmail.com', phone: '7862417822', address: 'test address4', zip: '77007'}
+]
+
+function OriginalList (props) {
+  const listItems = props.contacts.map(ContactInfo)
+
+  return <div>{listItems}</div>
 }
 
-function TemplateList (props) {
+function ContactInfo (props, index) {
+  console.log('props in tL', props)
   return (
-    <div>
-      <li>{props.name}</li>
-      <li>{props.email}</li>
-    </div>
+    <ul key={index}>
+      <li>Name: {props.name}</li>
+      <li>City: {props.city}</li>
+      <li>State: {props.state}</li>
+      {/* <RaisedButton label='Details' secondary onClick={props.onClick} /> */}
+    </ul>
   )
+}
+
+// function OriginalDetails () {
+//   const listItems = defaultList.map(showDetails)
+//   return <div>{listItems}</div>
+// }
+
+// function ShowDetails (props) {
+//   console.log('inside if func: ' + show)
+//   if (props.show) {
+//     console.log('getting to showDetails func')
+//     return (
+//       <ul>
+//         <li>Email: {props.email}</li>
+//         <li>Phone: {props.phone}</li>
+//         <li>Address: {props.address}</li>
+//         <li>Zip: {props.zip}</li>
+//       </ul>
+//     )
+//   }
+//   console.log('NO SHOW')
+// }
+
+// function handleSubmitDetails (event) {
+//   event.preventDefault()
+//   console.log('pressed click for details!')
+//   show = true
+//   console.log(show)
+//   ShowDetails()
+// }
+
+class InitialList extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      showMore: false
+    }
+  }
+
+  toggleMore () {
+    console.log('toggle')
+    this.setState(function (currentState) {
+      return {showMore: !currentState.showMore}
+    })
+  }
+
+  render () {
+    const extra = this.state.showMore ? <div>Test!</div> : null
+    const clickFn = this.toggleMore.bind(this)
+    return (
+      <div>
+        <div><OriginalList onClick={clickFn} contacts={defaultList} /></div>
+        {extra}
+        <RaisedButton label='Details' secondary onClick={clickFn} />
+      </div>
+    )
+  }
 }
 
 class Form extends Component {
@@ -112,11 +185,11 @@ class Form extends Component {
                 <li>{this.state.zip}</li>
               </ul>
             </div>
-            : <OriginalList />}
+            : ''}
         </div>
       </div>
     )
   }
 }
 
-export default Form
+export {InitialList, Form}
