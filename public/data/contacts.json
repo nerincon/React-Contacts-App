@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Nelson",
+    "email": "nerincon1@gmail.com",
+    "phone": "111-222-3333",
+    "address": "Test Address 1",
+    "city": "Houston",
+    "state": "TX",
+    "zip": "77007"
+  },
+  {
+      "name": "Rincon",
+      "email": "nerincon1@hotmail.com",
+      "phone": "444-555-6666",
+      "address": "Test Address 2",
+      "city": "Austin",
+      "state": "TX",
+      "zip": "77012"
+    }
+]

@@ -1,0 +1,14 @@
+#formdata {
+    display: flex;
+    justify-content: end;
+    background-color: blue;
+}
+
+.form-square {
+    color: black;
+    border: 1px solid black;
+    padding:1.5em;
+    margin-top: 4em;
+    margin-left:1.6em;
+    margin-right: 750px;
+}
