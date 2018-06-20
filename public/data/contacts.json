@@ -9,12 +9,12 @@
     "zip": "77007"
   },
   {
-      "name": "Rincon",
-      "email": "nerincon1@hotmail.com",
-      "phone": "444-555-6666",
-      "address": "Test Address 2",
-      "city": "Austin",
-      "state": "TX",
-      "zip": "77012"
+    "name": "Rincon",
+    "email": "nerincon1@hotmail.com",
+    "phone": "444-555-6666",
+    "address": "Test Address 2",
+    "city": "Austin",
+    "state": "TX",
+    "zip": "77012"
     }
 ]

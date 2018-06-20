@@ -7,25 +7,23 @@ import registerServiceWorker from './registerServiceWorker'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
 
-
-
 function fetchFailed () {
-    console.error('Uh-oh - fetching initial inventory.json failed!')
-  }
-
+  console.error('Uh-oh - fetching initial inventory.json failed!')
+}
 
 if (!getContacts()) {
-    window.fetch('data/contacts.json')
-      .then(function (response) { return response.json() })
-      .then(setContacts)
-      .then(startRendering)
-      .catch(fetchFailed)
-  } else {
-    startRendering()
-  }
+  window.fetch('data/contacts.json')
+    .then(function (response) { return response.json() })
+    .then(setContacts)
+    .then(startRendering)
+    .catch(fetchFailed)
+} else {
+  console.log('something went wrong!!')
+  startRendering()
+}
 
 function startRendering () {
-    ReactDOM.render(<App />, document.getElementById('root'))
+  ReactDOM.render(<App contacts={getContacts()} />, document.getElementById('root'))
 }
 
 registerServiceWorker()

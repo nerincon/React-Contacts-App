@@ -3,7 +3,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import {green600} from 'material-ui/styles/colors'
 import ContactForm from './ContactForm.js'
-import NavBar from './NavBar.js';
+import NavBar from './NavBar.js'
 import ContactsPage from './ContactDisplay.js'
 import Homepage from './HomePage.js'
 
@@ -35,13 +35,12 @@ class App extends Component {
     }
   }
 
-
   render () {
     let pageComponent = <Homepage />
     if (this.state.route === '/add') {
       pageComponent = <ContactForm />
     } else if (this.state.route === '/show') {
-      pageComponent = <ContactsPage />
+      pageComponent = <ContactsPage contacts={this.props.contacts} />
     }
 
     return (
@@ -51,7 +50,7 @@ class App extends Component {
         </div>
         <div>
           <MuiThemeProvider muiTheme={theme}>
-          {pageComponent}
+            {pageComponent}
           </MuiThemeProvider>
         </div>
       </div>

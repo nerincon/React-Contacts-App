@@ -3,7 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import './ContactForm.css'
 import {CardTitle} from 'material-ui/Card'
-import {addItem} from './contact-func'
+import {addContact} from './contact-func'
 
 class ContactForm extends Component {
   constructor (props) {
@@ -29,12 +29,8 @@ class ContactForm extends Component {
     })
   }
 
-
-
-
   handleSubmit (event) {
     event.preventDefault()
-    console.log('pressed click!')
     const newItem = {
       name: this.state.name,
       email: this.state.email,
@@ -45,20 +41,20 @@ class ContactForm extends Component {
       zip: this.state.zip
     }
     console.log(newItem)
-    addItem(newItem)
+    addContact(newItem)
     this.setState({showMe: true})
     this.resetFormFields()
   }
 
   resetFormFields () {
     this.setState({
-        name: '',
-        email: '',
-        phone: '',
-        address: '',
-        city: '',
-        state: '',
-        zip: '',
+      name: '',
+      email: '',
+      phone: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: ''
     })
   }
 
