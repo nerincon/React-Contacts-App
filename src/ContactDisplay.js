@@ -23,10 +23,13 @@ class ContactsPage extends Component {
   constructor () {
     super()
     this.state = {
-      contacts: getContacts(),
       searchTxt: '',
       editIdx: -1
     }
+  }
+
+  componentDidMount() {
+      console.log(this.props);
   }
 
   updateSearchTxt (evt) {
@@ -51,10 +54,10 @@ class ContactsPage extends Component {
   }
 
   handleChange = (e, prop, idx) => {
-    const {value} = e.target
-    console.log(value)
-    this.setState(state => ({
-      contacts: state.contacts.map(
+    const {value} = e.target;
+    const {contacts} = this.props;
+    this.setState(() => ({
+      contacts: contacts.map(
         (row, j) => (j === idx ? {...row, [prop]: value }: row)
       )
     }));
@@ -63,24 +66,24 @@ class ContactsPage extends Component {
   render () {
     const updateSearchTxt = this.updateSearchTxt.bind(this)
     const matchFn = this.isMatch.bind(null, this.state.searchTxt)
-    const filteredItems = this.state.contacts && this.state.contacts.filter(matchFn)
+    const filteredItems = this.props.contacts && this.props.contacts.filter(matchFn)
     let bodyComponent = <ContactsTable 
     startEditing={this.startEditing} 
     editIdx={this.state.editIdx}
     handleChange={this.handleChange}
     stopEditing={this.stopEditing} 
-    deleteContact={deleteContact}
+    deleteContact={this.props.deleteContact}
     items={filteredItems} />
     if (filteredItems.length === 0) {
       bodyComponent = <NoContactsFound />
     }
     return (
-      <section>
-        <SearchInput searchTxt={this.state.searchTxt} updateSearchTxt={updateSearchTxt} />
-        <div>
-          {bodyComponent}
-        </div>
-      </section>
+        <section>
+            <SearchInput searchTxt={this.state.searchTxt} updateSearchTxt={updateSearchTxt} />
+            <div>
+                {bodyComponent}
+            </div>
+        </section>
     )
   }
 }
