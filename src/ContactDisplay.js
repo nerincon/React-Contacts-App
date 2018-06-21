@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {getContacts, deleteContact} from './contact-func.js'
 import ContactsTable from './ContactDetailsPage'
 import './ContactDisplay.css'
 
