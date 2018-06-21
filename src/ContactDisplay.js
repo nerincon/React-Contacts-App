@@ -27,10 +27,6 @@ class ContactsPage extends Component {
     }
   }
 
-  componentDidMount() {
-      console.log(this.props);
-  }
-
   updateSearchTxt (evt) {
     const newText = evt.currentTarget.value
     this.setState({searchTxt: newText})
@@ -50,13 +46,15 @@ class ContactsPage extends Component {
   }
   stopEditing = () => {
     this.setState({editIdx: -1});
+    // console.log(this.state.contacts)
+    this.props.updateContact(this.state.contacts)
   }
 
   handleChange = (e, prop, idx) => {
     const {value} = e.target;
     const {contacts} = this.props;
     this.setState(() => ({
-      contacts: contacts.map(
+      contacts : contacts.map(
         (row, j) => (j === idx ? {...row, [prop]: value }: row)
       )
     }));
@@ -72,6 +70,7 @@ class ContactsPage extends Component {
     handleChange={this.handleChange}
     stopEditing={this.stopEditing} 
     deleteContact={this.props.deleteContact}
+    updateContact={this.props.updateContact}
     items={filteredItems} />
     if (filteredItems.length === 0) {
       bodyComponent = <NoContactsFound />

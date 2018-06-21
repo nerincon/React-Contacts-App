@@ -22,7 +22,6 @@ function TableHeader () {
 
 function TableRow (props) {
   const {startEditing, handleChange, stopEditing, idx, editIdx} = props
-  console.log(props)
   const currentlyEditing = editIdx === idx
   const name = <span>{props.name}</span>
   const email = <span>{props.email}</span>
@@ -33,14 +32,14 @@ function TableRow (props) {
   const zip = <span>{props.zip}</span>
   return (
     <tr>
-      <td >{ currentlyEditing ? (<TextField name={'name' + idx}onChange={e => handleChange(e, 'name', idx)} value={props.name} />) : name }</td>
+      <td >{ currentlyEditing ? (<TextField name={'name' + idx}onChange={e => handleChange(e, 'name', idx)} defaultValue={props.name} />) : name }</td>
       <td >{ currentlyEditing ? (<TextField name={'email' + idx} onChange={e => handleChange(e, 'email', idx)} defaultValue={props.email} />) : (email) }</td>
       <td >{ currentlyEditing ? (<TextField name={'phone' + idx} onChange={e => handleChange(e, 'phone', idx)} defaultValue={props.phone} />) : (phone) }</td>
       <td >{ currentlyEditing ? (<TextField name={'address' + idx} onChange={e => handleChange(e, 'address', idx)} defaultValue={props.address} />) : (address) }</td>
       <td >{ currentlyEditing ? (<TextField name={'city' + idx} onChange={e => handleChange(e, 'city', idx)} defaultValue={props.city} />) : (city) }</td>
       <td >{ currentlyEditing ? (<TextField name={'state' + idx} onChange={e => handleChange(e, 'state', idx)} defaultValue={props.state} />) : (state) }</td>
       <td >{ currentlyEditing ? (<TextField name={'zip' + idx} onChange={e => handleChange(e, 'zip', idx)} defaultValue={props.zip} />) : (zip) }</td>
-      <td className='up-del'>{ currentlyEditing ? (<CheckIcon onClick={() => stopEditing(idx)} />) : (<EditIcon label='Update' onClick={() => startEditing(idx)} />)}</td>
+      <td className='up-del'>{ currentlyEditing ? (<CheckIcon onClick={() => { stopEditing(idx); props.updateContact(idx) }} />) : (<EditIcon label='Update' onClick={() => startEditing(idx)} />)}</td>
       <td className='up-del'><TrashIcon label='Delete' onClick={() => props.deleteContact(idx)} /></td>
     </tr>
   )
@@ -48,7 +47,6 @@ function TableRow (props) {
 
 function ContactsTable (props) {
   const rows = props.items.map((row, i) => {
-    console.log(props)
     return <TableRow {...row} {...props} key={i} idx={i} />
   })
 

@@ -13,7 +13,6 @@ class ContactForm extends Component {
         city: '',
         state: '',
         zip: '',
-        showMe: false
     }
 
     updateProperty(fieldId, evt) {
@@ -44,7 +43,6 @@ class ContactForm extends Component {
             zip: this.state.zip
         };
         this.props.addContact(newItem);
-        this.setState({showMe: true});
         this.resetFormFields()
     }
 

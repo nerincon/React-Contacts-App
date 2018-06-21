@@ -16,7 +16,7 @@ const theme = getMuiTheme({
 class App extends Component {
     state = {
         route: '/home',
-        contacts: []
+        contacts: [],
     };
 
     async componentDidMount() {
@@ -52,7 +52,6 @@ class App extends Component {
     }
 
     addContact = (contact) => {
-        console.log(this.state);
         this.setState({contacts: [...this.state.contacts, contact]}, () => {
             setContacts(this.state.contacts)
         })
@@ -65,12 +64,25 @@ class App extends Component {
         })
     };
 
+    updateContact = (contactsArray) => {
+        if(contactsArray.length > 0){
+            var contacts = []
+            for(var i=0; i < contactsArray.length; i++){
+                contacts.push(contactsArray[i])
+                console.log(contacts)
+                }
+        } else {return}
+        this.setState({contacts}, () => {
+            setContacts(contacts)
+        })
+    };
+
     render() {
         let pageComponent = <Homepage/>
         if (this.state.route === '/add') {
             pageComponent = <ContactForm addContact={this.addContact}/>
         } else if (this.state.route === '/show') {
-            pageComponent = <ContactsPage deleteContact={this.deleteContact} contacts={this.state.contacts}/>
+            pageComponent = <ContactsPage updateContact={this.updateContact} deleteContact={this.deleteContact} contacts={this.state.contacts}/>
         }
 
         return (

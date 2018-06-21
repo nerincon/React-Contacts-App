@@ -19,13 +19,4 @@ function addContact (newItem) {
   return getContacts()
 }
 
-function deleteContact (idx) {
-  const contacts = getContacts()
-  const newContact = contacts.filter(function (item, i) {
-    return i !== idx
-  })
-  setContacts(newContact)
-  return getContacts()
-}
-
-export {addContact, getContacts, setContacts, deleteContact}
+export {addContact, getContacts, setContacts}
